@@ -24,7 +24,7 @@ internal class AuthenticationService : ServiceBase, IAuthenticationService
         if (user == null || !_encryptHelper.Verify(password, user.Password)) return loginResult;
         
         loginResult.IsSuccess = true;
-        loginResult.Token = _jwtHelper.GenerateToken(user.UserName, 900);
+        loginResult.Token = _jwtHelper.GenerateToken(user.UserName, 10);
 
         return loginResult;
     }

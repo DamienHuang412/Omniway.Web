@@ -30,17 +30,24 @@ public class UserController : ControllerBase
         return Created();
     }
 
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     [HttpPost("/change-password")]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO request)
     {
-        await _userService.ChangePassword(new ChangePasswordModel
+        try
         {
-            UserName = User.Identity.Name,
-            OldPassword = request.OldPassword,
-            NewPassword = request.NewPassword
-        }, HttpContext.RequestAborted);
-
-        return Ok();
+            await _userService.ChangePassword(new ChangePasswordModel
+            {
+                UserName = User.Identity.Name,
+                OldPassword = request.OldPassword,
+                NewPassword = request.NewPassword
+            }, HttpContext.RequestAborted);
+        
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

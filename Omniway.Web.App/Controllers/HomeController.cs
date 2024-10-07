@@ -4,6 +4,7 @@ using Omniway.Web.App.Models;
 
 namespace Omniway.Web.App.Controllers;
 
+[Route("[controller]/[action]")]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -12,12 +13,15 @@ public class HomeController : Controller
     {
         _logger = logger;
     }
-
+    
+    [Route("")]
+    [Route("/")]
+    [Route("/Home")]
     public IActionResult Index()
     {
         return View();
     }
-
+    
     public IActionResult Privacy()
     {
         return View();

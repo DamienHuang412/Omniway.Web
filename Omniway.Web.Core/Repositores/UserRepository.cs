@@ -10,6 +10,10 @@ internal class UserRepository(IDbContextFactory<OmniwayDbContext> dbContextFacto
     {
         await using var context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
 
+        var existsUser = context.Users.FirstOrDefault(x => x.UserName == user.UserName);
+        
+        if(existsUser != null) return existsUser.Id;
+        
         var entity = await context.Users.AddAsync(user, cancellationToken);
 
         await context.SaveChangesAsync(cancellationToken);
@@ -31,18 +35,11 @@ internal class UserRepository(IDbContextFactory<OmniwayDbContext> dbContextFacto
         return context.Users.FirstOrDefault(u => u.UserName == userName);
     }
 
-    public async Task<UserEntity?> Login(string userName, string password, CancellationToken cancellationToken)
-    {
-        await using var context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
-        
-        return context.Users.FirstOrDefault(u => u.UserName == userName && u.Password == password);
-    }
-
     public async Task ChangePassword(UserEntity user, CancellationToken cancellationToken)
     {
         await using var context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
         
-        var entity = context.Users.FirstOrDefault(u => u.UserName == user.UserName);
+        var entity = context.Users.FirstOrDefault(u => u.Id == user.Id);
 
         if (entity != null)
         {

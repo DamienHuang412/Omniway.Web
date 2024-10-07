@@ -31,9 +31,9 @@ internal class UserService(IUserRepository userRepository, IEncryptHelper encryp
 
     public async Task<UserModel> ChangePassword(ChangePasswordModel model, CancellationToken cancellationToken)
     {
-        var userEntity = await _userRepository.Login(model.UserName, model.OldPassword, cancellationToken);
+        var userEntity = await _userRepository.GetByName(model.UserName, cancellationToken);
 
-        if (userEntity == null)
+        if (userEntity == null || !_encryptHelper.Verify(model.OldPassword, userEntity.Password))
         {
             throw new ArgumentException("Invalid Old Password");
         }
@@ -41,7 +41,7 @@ internal class UserService(IUserRepository userRepository, IEncryptHelper encryp
         await _userRepository.ChangePassword(new UserEntity
         {
             Id = userEntity.Id,
-            Password = model.NewPassword
+            Password = _encryptHelper.Encrypt(model.NewPassword)
         }, cancellationToken);
 
         return new UserModel

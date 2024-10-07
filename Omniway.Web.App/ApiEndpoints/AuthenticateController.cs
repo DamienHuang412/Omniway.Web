@@ -10,7 +10,6 @@ namespace Omniway.Web.App.ApiEndpoints;
 public class AuthenticateController : ControllerBase
 {
     private readonly IAuthenticationService _authenticationService;
-    private const string UserName = "UserName";
     
     public AuthenticateController(IAuthenticationService authenticationService)
     {
@@ -24,8 +23,6 @@ public class AuthenticateController : ControllerBase
         var result = await _authenticationService.Login(request.UserName, request.Password, HttpContext.RequestAborted);
 
         if (!result.IsSuccess) return BadRequest();
-        
-        HttpContext.Response.Cookies.Append(UserName, request.UserName, new CookieOptions { Expires = DateTimeOffset.UtcNow.AddHours(1)});
             
         return Ok(new { result.Token });
     }
@@ -33,8 +30,6 @@ public class AuthenticateController : ControllerBase
     [HttpPost("/logout")]
     public async Task<IActionResult> Logout()
     {
-        HttpContext.Response.Cookies.Delete(UserName, new CookieOptions { Expires = DateTimeOffset.UtcNow.AddHours(1)});
-
         return Ok();
     }
 }

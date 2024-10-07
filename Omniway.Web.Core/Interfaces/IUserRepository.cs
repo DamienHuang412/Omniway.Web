@@ -10,7 +10,5 @@ internal interface IUserRepository
 
     Task<UserEntity?> GetByName(string userName, CancellationToken cancellationToken);
     
-    Task<UserEntity?> Login(string userName, string password, CancellationToken cancellationToken);
-    
     Task ChangePassword(UserEntity user, CancellationToken cancellationToken);
 }
