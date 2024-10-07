@@ -4,24 +4,21 @@ using Omniway.Web.Core.Interfaces;
 
 namespace Omniway.Web.Core.Services;
 
-internal class DataInitialService(IDbContextFactory<OmniwayDbContext> dbContextFactory, IEncryptHelper encryptHelper)
-    : ServiceBase(dbContextFactory, encryptHelper), IDataInitialService
+internal class DataInitialService(IUserRepository userRepository, IEncryptHelper encryptHelper)
+    : ServiceBase(userRepository, encryptHelper), IDataInitialService
 {
-    private const string DefaultUserName = "admin";
     private const string DefaultUserPassword = "pass.123";
 
     public async Task Initialize(CancellationToken cancellationToken)
     {
-        await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
-
-        var adminUser = await dbContext.Users.FirstOrDefaultAsync(x => x.UserName == DefaultUserName, cancellationToken);
+        var adminUser = await _userRepository.GetByName(HardCode.DefaultUserName, cancellationToken);
 
         if (adminUser == null)
         {
-            await dbContext.Users.AddAsync(new UserEntity
+            await _userRepository.Create(new UserEntity
             {
-                UserName = DefaultUserName,
-                Password = _encryptHelper.Encrypt(DefaultUserPassword, DefaultUserName)
+                UserName = HardCode.DefaultUserName,
+                Password = _encryptHelper.Encrypt(DefaultUserPassword)
             }, cancellationToken);
         }
     }

@@ -5,12 +5,12 @@ namespace Omniway.Web.Core.Services;
 
 internal abstract class ServiceBase
 {
-    protected readonly IDbContextFactory<OmniwayDbContext> _dbContextFactory;
+    protected readonly IUserRepository _userRepository;
     protected readonly IEncryptHelper _encryptHelper;
     
-    internal ServiceBase(IDbContextFactory<OmniwayDbContext> dbContextFactory, IEncryptHelper encryptHelper)
+    internal ServiceBase(IUserRepository userRepository, IEncryptHelper encryptHelper)
     {
-        _dbContextFactory = dbContextFactory;
+        _userRepository = userRepository;
         _encryptHelper = encryptHelper;
     }
 }

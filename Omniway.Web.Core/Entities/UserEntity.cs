@@ -1,8 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace Omniway.Web.Core.Entities;
 
-[PrimaryKey(nameof(Id))]
 internal class UserEntity
 {
     public int Id { get; set; }

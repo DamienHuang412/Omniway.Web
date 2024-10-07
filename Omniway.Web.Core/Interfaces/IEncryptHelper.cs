@@ -2,5 +2,5 @@ namespace Omniway.Web.Core.Interfaces;
 
 public interface IEncryptHelper
 {
-    public string Encrypt(string value, string salt);
+    public string Encrypt(string value);
 }

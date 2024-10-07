@@ -10,8 +10,8 @@ using Omniway.Web.Core;
 namespace Omniway.Web.Core.Migrations
 {
     [DbContext(typeof(OmniwayDbContext))]
-    [Migration("20241007052348_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241007072704_SpecificColumn")]
+    partial class SpecificColumn
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,13 @@ namespace Omniway.Web.Core.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 

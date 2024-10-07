@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Omniway.Web.Core.Interfaces;
+using Omniway.Web.Core.Repositores;
 using Omniway.Web.Core.Services;
 using Omniway.Web.Core.Utilities;
 
@@ -14,10 +15,18 @@ public static class HostingExtension
     {
         var configuration = builder.Configuration;
 
-        builder.Services.AddSingleton<IDataInitialService, DataInitialService>();
-        builder.Services.AddSingleton<IEncryptHelper, BCryptEncryptHelper>();
+        var serviceCollection = builder.Services;
+
+        serviceCollection.AddSingleton<IUserRepository, UserRepository>();
         
-        return builder.Services.AddDbContextFactory<OmniwayDbContext>(
+        serviceCollection.AddSingleton<IDataInitialService, DataInitialService>();
+        serviceCollection.AddSingleton<IAuthenticationService, AuthenticationService>();
+        serviceCollection.AddSingleton<IUserService, UserService>();
+        
+        serviceCollection.AddSingleton<IEncryptHelper, BCryptEncryptHelper>();
+        serviceCollection.AddSingleton<IJwtHelper, JwtHelper>();
+        
+        return serviceCollection.AddDbContextFactory<OmniwayDbContext>(
             options => options.UseSqlite(configuration.GetConnectionString("SqlLite")));
     }
 }
