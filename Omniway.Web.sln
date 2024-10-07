@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniway.Web.Core", "Omniway.Web.Core\Omniway.Web.Core.csproj", "{0E7F2F78-F86F-4B0C-8F02-7E414939D06B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omniway.Web.App", "Omniway.Web.App\Omniway.Web.App.csproj", "{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0E7F2F78-F86F-4B0C-8F02-7E414939D06B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E7F2F78-F86F-4B0C-8F02-7E414939D06B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E7F2F78-F86F-4B0C-8F02-7E414939D06B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

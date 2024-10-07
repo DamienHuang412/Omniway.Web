@@ -31,14 +31,14 @@ internal class UserRepository(IDbContextFactory<OmniwayDbContext> dbContextFacto
         return context.Users.FirstOrDefault(u => u.UserName == userName);
     }
 
-    public async Task<UserEntity?> Login(string username, string password, CancellationToken cancellationToken)
+    public async Task<UserEntity?> Login(string userName, string password, CancellationToken cancellationToken)
     {
         await using var context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
         
-        return context.Users.FirstOrDefault(u => u.UserName == username && u.Password == password);
+        return context.Users.FirstOrDefault(u => u.UserName == userName && u.Password == password);
     }
 
-    public async Task Update(UserEntity user, CancellationToken cancellationToken)
+    public async Task ChangePassword(UserEntity user, CancellationToken cancellationToken)
     {
         await using var context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
         
@@ -48,6 +48,7 @@ internal class UserRepository(IDbContextFactory<OmniwayDbContext> dbContextFacto
         {
             entity.Password = user.Password;
 
+            context.Users.Update(entity);
             await context.SaveChangesAsync(cancellationToken);
         }
     }

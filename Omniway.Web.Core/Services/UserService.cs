@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Omniway.Web.Core.Entities;
 using Omniway.Web.Core.Interfaces;
 using Omniway.Web.Core.Models;
@@ -39,7 +38,7 @@ internal class UserService(IUserRepository userRepository, IEncryptHelper encryp
             throw new ArgumentException("Invalid Old Password");
         }
 
-        await _userRepository.Update(new UserEntity
+        await _userRepository.ChangePassword(new UserEntity
         {
             Id = userEntity.Id,
             Password = model.NewPassword

@@ -19,16 +19,21 @@ internal class JwtHelper : IJwtHelper
             .ToDictionary(x => x.Key, x => x.Value ?? string.Empty);
 
         if (!jwtSettings.TryGetValue("Issuer", out _issuer!)  || 
-            !jwtSettings.TryGetValue("signKey", out _signKey!))
+            !jwtSettings.TryGetValue("SigningKey", out _signKey!))
         {
             throw new ArgumentException("JWT settings are missing");
         }
     }
     
+    public string Issuer => _issuer;
+    
+    public string SigningKey => _signKey;
+
     public string GenerateToken(string userName, int expireSeconds)
     {
         var claims = new List<Claim>
         {
+            new(JwtRegisteredClaimNames.Name, userName),
             new(JwtRegisteredClaimNames.Sub, userName),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(ClaimTypes.Role, "Users")

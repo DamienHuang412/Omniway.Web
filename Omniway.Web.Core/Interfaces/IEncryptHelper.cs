@@ -2,5 +2,7 @@ namespace Omniway.Web.Core.Interfaces;
 
 public interface IEncryptHelper
 {
-    public string Encrypt(string value);
+    string Encrypt(string value);
+
+    bool Verify(string source, string hashedText);
 }

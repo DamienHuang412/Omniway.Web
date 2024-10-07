@@ -9,6 +9,7 @@ internal class OmniwayDbContext : DbContext
 
     public OmniwayDbContext(DbContextOptions<OmniwayDbContext> options) : base(options)
     {
+        Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -10,8 +10,8 @@ using Omniway.Web.Core;
 namespace Omniway.Web.Core.Migrations
 {
     [DbContext(typeof(OmniwayDbContext))]
-    [Migration("20241007072704_SpecificColumn")]
-    partial class SpecificColumn
+    [Migration("20241007123057_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,9 @@ namespace Omniway.Web.Core.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

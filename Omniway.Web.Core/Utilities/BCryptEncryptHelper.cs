@@ -5,10 +5,13 @@ namespace Omniway.Web.Core.Utilities;
 
 internal class BCryptEncryptHelper : IEncryptHelper
 {
-    private const string Salt = "!@#$%^&*()";
-    
     public string Encrypt(string value)
     {
-        return BlueCat.HashPassword(value, Salt);
+        return BlueCat.HashPassword(value, BlueCat.GenerateSalt());
+    }
+
+    public bool Verify(string source, string hashedText)
+    {
+        return BlueCat.Verify(source, hashedText);
     }
 }
