@@ -11,6 +11,10 @@
 
 See `localhost:5225/swagger/index.html` for testing.
 
+### MVC
+
+1. Allow User Login & Register
+
 ## How To Run 
 
 1. Open Terminal
