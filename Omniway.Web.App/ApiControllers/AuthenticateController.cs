@@ -1,16 +1,10 @@
-using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using Omniway.Web.App.Constants;
+using Omniway.Web.App.Interfaces;
 using Omniway.Web.App.Models;
 using Omniway.Web.Core.Interfaces;
-using System.Text.Encodings;
-using System.Text.Json;
-using Omniway.Web.App.Interfaces;
-using Omniway.Web.App.Managers;
 
-namespace Omniway.Web.App.ApiEndpoints;
+namespace Omniway.Web.App.ApiControllers;
 
 [ApiController]
 public class AuthenticateController : ControllerBase
@@ -28,6 +22,8 @@ public class AuthenticateController : ControllerBase
     [HttpPost("/login")]
     public async Task<IActionResult> Login([FromBody]LoginViewModel request)
     {
+        if (!ModelState.IsValid) return BadRequest();
+        
         var result = await _authenticationService.Login(request.UserName, request.Password, HttpContext.RequestAborted);
 
         if (!result.IsSuccess) return BadRequest();

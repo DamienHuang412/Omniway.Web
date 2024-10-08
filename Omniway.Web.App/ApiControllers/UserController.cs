@@ -5,7 +5,7 @@ using Omniway.Web.App.Models;
 using Omniway.Web.Core.Interfaces;
 using Omniway.Web.Core.Models;
 
-namespace Omniway.Web.App.ApiEndpoints;
+namespace Omniway.Web.App.ApiControllers;
 
 [ApiController]
 public class UserController : ControllerBase
@@ -35,6 +35,8 @@ public class UserController : ControllerBase
     [HttpPost("/change-password")]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordViewModel request)
     {
+        if (!ModelState.IsValid) return BadRequest();
+        
         try
         {
             await _userService.ChangePassword(new ChangePasswordModel

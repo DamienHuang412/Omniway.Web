@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Omniway.Web.App.Attributes;
-using Omniway.Web.App.Interfaces;
 using Omniway.Web.App.Models;
 using Omniway.Web.Core.Interfaces;
 using Omniway.Web.Core.Models;
@@ -30,15 +28,18 @@ public class UserController : Controller
 
     [HttpGet]
     [SwaggerIgnore]
-    public IActionResult Register()
+    public IActionResult RegisterUser()
     {
         return View();
     }
 
     [HttpPost]
     [SwaggerIgnore]
-    public async Task<IActionResult> Register([FromForm] RegisterViewModel model)
+    public async Task<IActionResult> RegisterUser([FromForm] RegisterViewModel model)
     {
+        if(!ModelState.IsValid)
+            return View();
+        
         _ = await _userService.Create(new RegisterModel
         {
             UserName = model.UserName,

@@ -6,13 +6,11 @@ public class LoginViewModel
 {
     [Display(Name = "User Name")]
     [Required]
-    [MinLength(1)]
-    [MaxLength(20)]
+    [StringLength(50, MinimumLength = 6)]
     public string UserName { get; set; }
 
     [Display(Name = "Password")]
     [Required]
-    [MinLength(1)]
-    [MaxLength(20)]
+    [StringLength(50, MinimumLength = 6)]
     public string Password { get; set; }
 }

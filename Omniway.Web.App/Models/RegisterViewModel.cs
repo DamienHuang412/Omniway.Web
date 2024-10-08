@@ -6,10 +6,10 @@ public class RegisterViewModel
 {
     [Display(Name = "User Name")]
     [Required]
+    [StringLength(50, MinimumLength = 6)]
     public string UserName { get; set; }
 
     [Required]
-    [MinLength(6)]
-    [MaxLength(20)]
+    [StringLength(50, MinimumLength = 6)]
     public string Password { get; set; }
 }
