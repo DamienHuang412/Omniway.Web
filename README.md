@@ -1,5 +1,15 @@
-# Omniway.Web
+# Practice.Web
 
+## Features
+
+### Api
+1. POST **/register** Register new user
+2. POST **/logn** Login with exists user
+3. POST **/change-password** Change the current user's password
+4. POST **/logout** Logout by invalidating session
+5. GET **/health** Simple HealthChek
+
+See `localhost:5225/swagger/index.html` for testing.
 
 ## How To Run 
 
