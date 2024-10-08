@@ -19,4 +19,4 @@ See `localhost:5225/swagger/index.html` for testing.
 
 1. Open Terminal
 2. Type And Enter ```cd path/to/sln/```
-3. Type And Enter ```dotnet run --project ./src/Omniway.Web.Entrace/Omniway.Web.Entrace.csproj ```
+3. Type And Enter ```dotnet run --project ./src/Practice.Web.Entrace/Practice.Web.Entrace.csproj ```
