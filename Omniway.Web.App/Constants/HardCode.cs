@@ -2,9 +2,9 @@ namespace Omniway.Web.App.Constants;
 
 public static class HardCode
 {
-    public static class TempData
+    public static class Cookie
     {
-        public const string User = "User";
+        public const string JwtToken = "JwtToken";
     }
 
 }

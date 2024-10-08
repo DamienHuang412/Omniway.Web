@@ -41,19 +41,24 @@ public class AuthController : Controller
             .GetAwaiter().GetResult();
 
         if (!result.IsSuccess) return View();
-
+        
         _allowlistManager.AddAllowlist(model.UserName);
         
-        return View("../User/Index", new UserViewModel
+        HttpContext.Response.Cookies.Append(HardCode.Cookie.JwtToken, result.Token.Token, new CookieOptions
         {
-            UserName = HttpContext.User.Identity.Name
+            HttpOnly = true,
+            Expires = DateTimeOffset.UtcNow.AddMinutes(10)
         });
+
+        return RedirectToAction("Index", "User");
     }
     
     [SwaggerIgnore]
     public IActionResult Logout()
     {
         _allowlistManager.RemoveAllowlist(HttpContext.User.Identity.Name);
+        Response.Cookies.Delete(HardCode.Cookie.JwtToken);
+        
         return RedirectToAction("Index", "Home");
     }
 

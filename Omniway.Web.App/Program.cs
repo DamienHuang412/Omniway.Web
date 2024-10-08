@@ -35,13 +35,28 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = false,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey))
         };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                if (context.HttpContext.Request.Headers.TryGetValue("Authorization", out var authHeader))
+                {
+                    return Task.CompletedTask;
+                }
+                var token = context.HttpContext.Request.Cookies[Omniway.Web.App.Constants.HardCode.Cookie.JwtToken];
+                if (!string.IsNullOrEmpty(token))
+                {
+                    context.HttpContext.Request.Headers.Append("Authorization", $"Bearer {token}");
+                }
+                return Task.CompletedTask;
+            }
+        };
     });
 builder.Services.AddHealthChecks()
     .AddCheck<SimpleHealthCheck>("Simple");
 builder.Services.AddSwaggerGen(options =>
 {
-    
-    
     options.AddSecurityDefinition("Bearer", 
         new OpenApiSecurityScheme
         {
