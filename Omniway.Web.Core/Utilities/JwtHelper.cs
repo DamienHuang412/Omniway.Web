@@ -30,12 +30,12 @@ internal class JwtHelper : IJwtHelper
     {
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Name, userName),
+            new(ClaimsIdentity.DefaultNameClaimType, userName),
             new(JwtRegisteredClaimNames.Sub, userName),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(ClaimTypes.Role, "Users")
         };
-
+        
         var userClaimsIdentity = new ClaimsIdentity(claims, "Bearer");
 
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_signKey));

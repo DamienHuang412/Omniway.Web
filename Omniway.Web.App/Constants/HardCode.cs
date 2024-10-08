@@ -7,9 +7,4 @@ public static class HardCode
         public const string User = "User";
     }
 
-    public static class Session
-    {
-        public const string Token = "Token";
-    }
-
 }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Omniway.Web.App.Attributes;
 using Omniway.Web.App.Models;
 using Omniway.Web.Core.Interfaces;
 using Omniway.Web.Core.Models;
@@ -30,6 +31,7 @@ public class UserController : ControllerBase
     }
 
     [Authorize]
+    [AllowlistAuthorize]
     [HttpPost("/change-password")]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordViewModel request)
     {

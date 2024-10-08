@@ -6,8 +6,6 @@ public class RegisterViewModel
 {
     [Display(Name = "User Name")]
     [Required]
-    [MinLength(1)]
-    [MaxLength(20)]
     public string UserName { get; set; }
 
     [Required]

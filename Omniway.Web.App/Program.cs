@@ -4,6 +4,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Omniway.Web.App;
 using Omniway.Web.App.Hosting;
+using Omniway.Web.App.Interfaces;
+using Omniway.Web.App.Managers;
 using Omniway.Web.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.UseCore();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IAllowlistManager, AllowlistManager>();
+
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -35,6 +40,8 @@ builder.Services.AddHealthChecks()
     .AddCheck<SimpleHealthCheck>("Simple");
 builder.Services.AddSwaggerGen(options =>
 {
+    
+    
     options.AddSecurityDefinition("Bearer", 
         new OpenApiSecurityScheme
         {
@@ -64,7 +71,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddHostedService<PrePreparationHostedService>();
 builder.Services.AddSession(options => {
-    options.IdleTimeout = TimeSpan.FromMinutes(60);
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
 });
 
 var app = builder.Build();

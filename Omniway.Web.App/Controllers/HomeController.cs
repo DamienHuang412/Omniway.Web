@@ -1,12 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Omniway.Web.App.Constants;
 using Omniway.Web.App.Models;
+using Swashbuckle.AspNetCore.Annotations;
 using IAuthenticationService = Omniway.Web.Core.Interfaces.IAuthenticationService;
 
 namespace Omniway.Web.App.Controllers;
 
-[Route("[controller]/[action]")]
 public class HomeController : Controller
 {
     private readonly ILogger _logger;
@@ -19,6 +18,7 @@ public class HomeController : Controller
         _authenticationService = authenticationService;
     }
     
+    [SwaggerIgnore]
     [Route("")]
     [Route("/")]
     [Route("/Home")]
@@ -27,11 +27,13 @@ public class HomeController : Controller
         return View();
     }
     
+    [SwaggerIgnore]
     public IActionResult Privacy()
     {
         return View();
     }
 
+    [SwaggerIgnore]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
