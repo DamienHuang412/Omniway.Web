@@ -1,17 +1,22 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Omniway.Web.App.Constants;
 using Omniway.Web.App.Models;
+using IAuthenticationService = Omniway.Web.Core.Interfaces.IAuthenticationService;
 
 namespace Omniway.Web.App.Controllers;
 
 [Route("[controller]/[action]")]
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger _logger;
+    private readonly IAuthenticationService _authenticationService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger,
+        IAuthenticationService authenticationService)
     {
         _logger = logger;
+        _authenticationService = authenticationService;
     }
     
     [Route("")]

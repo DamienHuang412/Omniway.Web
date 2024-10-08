@@ -4,5 +4,5 @@ public class AuthenticateModel
 {
     public bool IsSuccess { get; set; }
     
-    public string Token { get; set; }
+    public TokenModel Token { get; set; }
 }

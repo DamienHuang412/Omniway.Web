@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Omniway.Web.App.DTOs;
+using Omniway.Web.App.Models;
 using Omniway.Web.Core.Interfaces;
 using Omniway.Web.Core.Models;
 
@@ -19,7 +18,7 @@ public class UserController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("/register")]
-    public async Task<IActionResult> Register([FromBody] RegisterDTO request)
+    public async Task<IActionResult> Register([FromBody] RegisterViewModel request)
     {
         _ = await _userService.Create(new RegisterModel
         {
@@ -32,7 +31,7 @@ public class UserController : ControllerBase
 
     [Authorize]
     [HttpPost("/change-password")]
-    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO request)
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordViewModel request)
     {
         try
         {

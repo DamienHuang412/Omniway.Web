@@ -12,24 +12,25 @@ builder.UseCore();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.IncludeErrorDetails = true;
-
-    var validIssuer = builder.Configuration.GetValue<string>("JwtSettings:Issuer");
-    var signingKey = builder.Configuration.GetValue<string>("JwtSettings:SigningKey");
-    options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
-        NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
-        RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-        ValidateIssuer = true,
-        ValidIssuer = validIssuer,
-        ValidateAudience = false,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = false,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey))
-    };
-});
+        options.IncludeErrorDetails = true;
+
+        var validIssuer = builder.Configuration.GetValue<string>("JwtSettings:Issuer");
+        var signingKey = builder.Configuration.GetValue<string>("JwtSettings:SigningKey");
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+            RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+            ValidateIssuer = true,
+            ValidIssuer = validIssuer,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = false,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey))
+        };
+    });
 builder.Services.AddHealthChecks()
     .AddCheck<SimpleHealthCheck>("Simple");
 builder.Services.AddSwaggerGen(options =>
@@ -62,7 +63,9 @@ builder.Services.AddSwaggerGen(options =>
         });
 });
 builder.Services.AddHostedService<PrePreparationHostedService>();
-
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
+});
 
 var app = builder.Build();
 
@@ -91,6 +94,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
 app.MapSwagger()
     .RequireAuthorization();

@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Omniway.Web.App.DTOs;
+namespace Omniway.Web.App.Models;
 
-public class LoginDTO
+public class RegisterViewModel
 {
+    [Display(Name = "User Name")]
     [Required]
     [MinLength(1)]
     [MaxLength(20)]

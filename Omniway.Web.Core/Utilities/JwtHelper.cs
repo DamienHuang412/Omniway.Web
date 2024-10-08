@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using Omniway.Web.Core.Interfaces;
+using Omniway.Web.Core.Models;
 
 namespace Omniway.Web.Core.Utilities;
 
@@ -24,12 +25,8 @@ internal class JwtHelper : IJwtHelper
             throw new ArgumentException("JWT settings are missing");
         }
     }
-    
-    public string Issuer => _issuer;
-    
-    public string SigningKey => _signKey;
 
-    public string GenerateToken(string userName, int expireSeconds)
+    public TokenModel GenerateToken(string userName, int expireSeconds)
     {
         var claims = new List<Claim>
         {
@@ -39,7 +36,7 @@ internal class JwtHelper : IJwtHelper
             new(ClaimTypes.Role, "Users")
         };
 
-        var userClaimsIdentity = new ClaimsIdentity(claims);
+        var userClaimsIdentity = new ClaimsIdentity(claims, "Bearer");
 
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_signKey));
         var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
@@ -55,6 +52,10 @@ internal class JwtHelper : IJwtHelper
         var tokenHandler = new JsonWebTokenHandler();
         var serializeToken = tokenHandler.CreateToken(tokenDescriptor);
 
-        return serializeToken;
+        return new TokenModel
+        {
+            Token = serializeToken,
+            ClaimsIdentity = userClaimsIdentity
+        };
     }
 }

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using Omniway.Web.App.DTOs;
+using Omniway.Web.App.Models;
 using Omniway.Web.Core.Interfaces;
 
 namespace Omniway.Web.App.ApiEndpoints;
@@ -18,13 +17,13 @@ public class AuthenticateController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("/login")]
-    public async Task<IActionResult> Login([FromBody]LoginDTO request)
+    public async Task<IActionResult> Login([FromBody]LoginViewModel request)
     {
         var result = await _authenticationService.Login(request.UserName, request.Password, HttpContext.RequestAborted);
 
         if (!result.IsSuccess) return BadRequest();
             
-        return Ok(new { result.Token });
+        return Ok(new { result.Token.Token });
     }
 
     [HttpPost("/logout")]
