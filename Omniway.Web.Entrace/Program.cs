@@ -87,6 +87,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddHostedService<PrePreparationHostedService>();
 builder.Services.AddSession(options => {
     options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.Cookie.Name = ".Omniway.Web.Session";
 });
 
 var app = builder.Build();
