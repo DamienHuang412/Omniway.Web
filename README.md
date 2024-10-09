@@ -9,14 +9,22 @@
 4. POST **/logout** Logout by invalidating session
 5. GET **/health** Simple HealthChek
 
-See `localhost:5225/swagger/index.html` for testing.
+See `localhost:5082/swagger/index.html` for testing.
+
+## How To Run
+
+1. Open Terminal
+2. Type And Enter ```cd path/to/sln/```
+3. Type And Enter ```dotnet run --project ./src/Practice.Web.Api/Practice.Web.Api.csproj ```
 
 ### MVC
 
 1. Allow User Login & Register
 
-## How To Run 
+See `localhost:5225` for testing.
+
+## How To Run
 
 1. Open Terminal
 2. Type And Enter ```cd path/to/sln/```
-3. Type And Enter ```dotnet run --project ./src/Practice.Web.Entrace/Practice.Web.Entrace.csproj ```
+3. Type And Enter ```dotnet run --project ./src/Practice.Web.Mvc/Practice.Web.Mvc.csproj ```
