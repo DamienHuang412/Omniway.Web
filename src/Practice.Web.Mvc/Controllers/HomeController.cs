@@ -7,19 +7,16 @@ namespace Practice.Web.Mvc.Controllers;
 
 public class HomeController : Controller
 {
-    [SwaggerIgnore]
     public IActionResult Index()
     {
         return View();
     }
     
-    [SwaggerIgnore]
     public IActionResult Privacy()
     {
         return View();
     }
 
-    [SwaggerIgnore]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

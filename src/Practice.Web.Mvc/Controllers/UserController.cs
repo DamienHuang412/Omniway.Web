@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Practice.Web.Core.Interfaces;
 using Practice.Web.Core.Models;
 using Practice.Web.Mvc.Models;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace Practice.Web.Mvc.Controllers;
 
@@ -14,25 +14,36 @@ public class UserController : Controller
     {
         _userService = userService;
     }
-    
-    [SwaggerIgnore]
-    public IActionResult Index()
+
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
     {
-        return View(new UserViewModel
+        var data = await _userService.Read(page, pageSize, HttpContext.RequestAborted);
+
+        return View(new UsersViewModel
         {
-            UserName = HttpContext.User.Identity.Name
+            Page = page,
+            PageSize = pageSize,
+            TotalCount = data.TotalCount,
+            TotalPage = (int)Math.Ceiling(data.TotalCount / (double)pageSize),
+            Data = data.Data
+                .Select(x => new UserViewModel
+                {
+                    Id = x.Id,
+                    UserName = x.UserName
+                }).ToArray()
         });
     }
 
     [HttpGet]
-    [SwaggerIgnore]
     public IActionResult RegisterUser()
     {
         return View();
     }
 
     [HttpPost]
-    [SwaggerIgnore]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> RegisterUser([FromForm] RegisterViewModel model)
     {
         if(!ModelState.IsValid)

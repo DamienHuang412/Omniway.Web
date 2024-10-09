@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Practice.Web.Core.Entities;
 using Practice.Web.Core.Interfaces;
+using Practice.Web.Core.Models;
 
 namespace Practice.Web.Core.Repositores;
 
@@ -26,6 +27,27 @@ internal class UserRepository(IDbContextFactory<OmniwayDbContext> dbContextFacto
         await using var context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
 
         return context.Users.ToArray();
+    }
+
+    public async Task<UserPaginationModel> Read(int pageIndex, int pageSize, CancellationToken cancellationToken)
+    {
+        await using var context = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+        
+        var totalCount = await context.Users.CountAsync(cancellationToken);
+        var users = context.Users
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .Select(x => new UserModel
+            {
+                Id = x.Id,
+                UserName = x.UserName
+            }).ToArray();
+
+        return new UserPaginationModel
+        {
+            Data = users,
+            TotalCount = totalCount
+        };
     }
 
     public async Task<UserEntity?> GetByName(string userName, CancellationToken cancellationToken)

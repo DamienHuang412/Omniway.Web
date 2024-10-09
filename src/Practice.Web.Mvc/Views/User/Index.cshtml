@@ -1,11 +1,45 @@
-@model UserViewModel
+@model UsersViewModel
 
 @{
     ViewData["Title"] = "User";
 }
 
-<h1 class="text-danger">User.</h1>
-<h2 class="text-danger">Show username.</h2>
-<p>
-    <strong>@Model.UserName</strong>
-</p>
+<h2>Username Listing</h2>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model.Data)
+    {
+    <tr>
+        <td>@user.Id</td>
+        <td>@user.UserName</td>
+    </tr>
+    }
+    </tbody>
+</table>
+
+<!-- 分頁連結 -->
+<nav>
+    <ul class="pagination">
+        <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(Model.Page - 1)">Previous</a>
+        </li>
+
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
+        {
+        <li class="page-item @(i == Model.Page ? "active" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+        </li>
+        }
+
+        <li class="page-item @(Model.Page == Model.TotalPage ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(Model.Page + 1)">Next</a>
+        </li>
+    </ul>
+</nav>

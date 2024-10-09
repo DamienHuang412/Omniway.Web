@@ -14,6 +14,11 @@ internal class UserService(IUserRepository userRepository, IEncryptHelper encryp
         return adminUser != null;
     }
 
+    public Task<UserPaginationModel> Read(int pageIndex, int pageSize, CancellationToken cancellationToken)
+    {
+        return userRepository.Read(pageIndex, pageSize, cancellationToken);
+    }
+
     public async Task<UserModel> Create(RegisterModel model, CancellationToken cancellationToken)
     {
         var userId = await _userRepository.Create(new UserEntity

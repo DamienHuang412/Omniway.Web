@@ -1,11 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Practice.Web.Mvc;
 using Practice.Web.Mvc.Hosting;
-using Practice.Web.Mvc.Interfaces;
-using Practice.Web.Mvc.Managers;
 using Practice.Web.Core;
 
 var builder = WebApplication.CreateBuilder(args);
