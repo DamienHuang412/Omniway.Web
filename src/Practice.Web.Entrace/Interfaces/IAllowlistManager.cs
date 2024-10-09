@@ -1,4 +1,4 @@
-namespace Omniway.Web.App.Interfaces;
+namespace Practice.Web.App.Interfaces;
 
 public interface IAllowlistManager
 {

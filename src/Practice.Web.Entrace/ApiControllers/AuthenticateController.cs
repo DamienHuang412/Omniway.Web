@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Omniway.Web.App.Interfaces;
-using Omniway.Web.App.Models;
+using Practice.Web.App.Interfaces;
+using Practice.Web.App.Models;
 using Practice.Web.Core.Interfaces;
 
-namespace Omniway.Web.App.ApiControllers;
+namespace Practice.Web.App.ApiControllers;
 
 [ApiController]
 public class AuthenticateController : ControllerBase

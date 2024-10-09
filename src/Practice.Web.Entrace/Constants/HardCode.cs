@@ -1,4 +1,4 @@
-namespace Omniway.Web.App.Constants;
+namespace Practice.Web.App.Constants;
 
 public static class HardCode
 {

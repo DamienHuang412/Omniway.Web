@@ -1,7 +1,7 @@
 using System.Text.Json;
-using Omniway.Web.App.Interfaces;
+using Practice.Web.App.Interfaces;
 
-namespace Omniway.Web.App.Managers;
+namespace Practice.Web.App.Managers;
 
 public class AllowlistManager : IAllowlistManager
 {

@@ -2,10 +2,10 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Omniway.Web.App;
-using Omniway.Web.App.Hosting;
-using Omniway.Web.App.Interfaces;
-using Omniway.Web.App.Managers;
+using Practice.Web.App;
+using Practice.Web.App.Hosting;
+using Practice.Web.App.Interfaces;
+using Practice.Web.App.Managers;
 using Practice.Web.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 {
                     return Task.CompletedTask;
                 }
-                var token = context.HttpContext.Request.Cookies[Omniway.Web.App.Constants.HardCode.Cookie.JwtToken];
+                var token = context.HttpContext.Request.Cookies[Practice.Web.App.Constants.HardCode.Cookie.JwtToken];
                 if (!string.IsNullOrEmpty(token))
                 {
                     context.HttpContext.Request.Headers.Append("Authorization", $"Bearer {token}");

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Omniway.Web.App.Interfaces;
+using Practice.Web.App.Interfaces;
 
-namespace Omniway.Web.App.Attributes;
+namespace Practice.Web.App.Attributes;
 
 public class AllowlistAuthorizeAttribute : ActionFilterAttribute
 {

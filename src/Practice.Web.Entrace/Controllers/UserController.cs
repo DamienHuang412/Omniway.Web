@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Omniway.Web.App.Attributes;
-using Omniway.Web.App.Models;
+using Practice.Web.App.Attributes;
+using Practice.Web.App.Models;
 using Practice.Web.Core.Interfaces;
 using Practice.Web.Core.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Omniway.Web.App.Controllers;
+namespace Practice.Web.App.Controllers;
 
 public class UserController : Controller
 {

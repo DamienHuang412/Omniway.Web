@@ -1,6 +1,6 @@
 using Practice.Web.Core.Interfaces;
 
-namespace Omniway.Web.App.Hosting;
+namespace Practice.Web.App.Hosting;
 
 public class PrePreparationHostedService : IHostedService
 {

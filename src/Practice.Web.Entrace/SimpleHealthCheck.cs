@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Practice.Web.Core.Interfaces;
 
-namespace Omniway.Web.App;
+namespace Practice.Web.App;
 
 public class SimpleHealthCheck : IHealthCheck
 {

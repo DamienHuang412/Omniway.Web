@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Omniway.Web.App.Constants;
-using Omniway.Web.App.Interfaces;
-using Omniway.Web.App.Models;
+using Practice.Web.App.Constants;
+using Practice.Web.App.Interfaces;
+using Practice.Web.App.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Omniway.Web.App.Controllers;
+namespace Practice.Web.App.Controllers;
 
 public class AuthController : Controller
 {

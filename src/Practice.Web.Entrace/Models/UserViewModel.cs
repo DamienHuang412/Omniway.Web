@@ -1,4 +1,4 @@
-namespace Omniway.Web.App.Models;
+namespace Practice.Web.App.Models;
 
 public class UserViewModel
 {

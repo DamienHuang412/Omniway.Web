@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Omniway.Web.App.Models;
+using Practice.Web.App.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Omniway.Web.App.Controllers;
+namespace Practice.Web.App.Controllers;
 
 public class HomeController : Controller
 {

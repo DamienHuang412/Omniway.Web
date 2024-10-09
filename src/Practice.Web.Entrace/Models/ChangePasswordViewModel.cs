@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Omniway.Web.App.Models;
+namespace Practice.Web.App.Models;
 
 public class ChangePasswordViewModel
 {
