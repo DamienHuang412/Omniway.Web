@@ -3,11 +3,11 @@ using Practice.Web.Core.Entities;
 
 namespace Practice.Web.Core;
 
-internal class OmniwayDbContext : DbContext
+internal class PracticeDbContext : DbContext
 {
     public DbSet<UserEntity> Users { get; set; }
 
-    public OmniwayDbContext(DbContextOptions<OmniwayDbContext> options) : base(options)
+    public PracticeDbContext(DbContextOptions<PracticeDbContext> options) : base(options)
     {
         Database.EnsureCreated();
     }

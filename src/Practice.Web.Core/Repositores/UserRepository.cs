@@ -5,7 +5,7 @@ using Practice.Web.Core.Models;
 
 namespace Practice.Web.Core.Repositores;
 
-internal class UserRepository(IDbContextFactory<OmniwayDbContext> dbContextFactory) : IUserRepository
+internal class UserRepository(IDbContextFactory<PracticeDbContext> dbContextFactory) : IUserRepository
 {
     public async Task<int> Create(UserEntity user, CancellationToken cancellationToken)
     {

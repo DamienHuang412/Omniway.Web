@@ -9,7 +9,7 @@ using Practice.Web.Core;
 
 namespace Practice.Web.Core.Migrations
 {
-    [DbContext(typeof(OmniwayDbContext))]
+    [DbContext(typeof(PracticeDbContext))]
     [Migration("20241007123057_InitialCreate")]
     partial class InitialCreate
     {

@@ -8,7 +8,7 @@ using Practice.Web.Core;
 
 namespace Practice.Web.Core.Migrations
 {
-    [DbContext(typeof(OmniwayDbContext))]
+    [DbContext(typeof(PracticeDbContext))]
     partial class OmniwayDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

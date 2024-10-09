@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Practice.Web.Core;
 
-internal class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<OmniwayDbContext>
+internal class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<PracticeDbContext>
 {
-    public OmniwayDbContext CreateDbContext(string[] args)
+    public PracticeDbContext CreateDbContext(string[] args)
     {
-        var builder = new DbContextOptionsBuilder<OmniwayDbContext>();
+        var builder = new DbContextOptionsBuilder<PracticeDbContext>();
 
         builder.UseSqlite("Data Source=omniway.sqlite");
 
-        return new OmniwayDbContext(builder.Options);
+        return new PracticeDbContext(builder.Options);
     }
 }

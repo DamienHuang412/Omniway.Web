@@ -26,7 +26,7 @@ public static class HostBuilderExtension
         serviceCollection.AddSingleton<IEncryptHelper, BCryptEncryptHelper>();
         serviceCollection.AddSingleton<IJwtHelper, JwtHelper>();
         
-        return serviceCollection.AddDbContextFactory<OmniwayDbContext>(
+        return serviceCollection.AddDbContextFactory<PracticeDbContext>(
             options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
     }
 }
