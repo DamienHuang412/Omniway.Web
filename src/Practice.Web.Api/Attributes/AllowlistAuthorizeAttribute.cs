@@ -8,6 +8,7 @@ public class AllowlistAuthorizeAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {
+        var agent = context.HttpContext.Request.Headers.UserAgent.ToString();
         if (context.HttpContext.User.Identity is not { IsAuthenticated: true })
         {
             context.Result = new UnauthorizedResult();

@@ -1,0 +1,27 @@
+@page "/register"
+@using Practice.Web.BlazorApp.Models
+@inject IJSRuntime JsRuntime
+@inject IUserService UserService
+@inject NavigationManager Navigation
+
+@code {
+
+    private async Task UserLogin(UserFormModel model)
+    {
+        var result = await UserService.Register(model);
+        
+        if(result)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Register Success");
+            Navigation.NavigateTo("/login", true);
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Register Failed");
+        }
+    }
+}
+
+<PageTitle>Login</PageTitle>
+
+<UserForm OnUserFormSubmit="UserLogin"/>

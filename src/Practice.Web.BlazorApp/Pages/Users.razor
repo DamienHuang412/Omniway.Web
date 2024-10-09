@@ -1,0 +1,17 @@
+@page "/users"
+@using Practice.Web.BlazorApp.Models
+@inject IUserService UserService
+<PageTitle>Users</PageTitle>
+
+
+<AuthorizeView>
+    <Authorized>
+        <Dashboard T="UserModel" LoadDataFunc="UserService.GetUsers"/>
+    </Authorized>
+    <NotAuthorized>
+        <RedirectToLogin/>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+}

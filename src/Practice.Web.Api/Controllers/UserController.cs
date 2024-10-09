@@ -31,7 +31,6 @@ public class UserController : ControllerBase
     }
 
     [Authorize]
-    [AllowlistAuthorize]
     [HttpPost("/change-password")]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO request)
     {
@@ -52,5 +51,16 @@ public class UserController : ControllerBase
         {
             return BadRequest(e.Message);
         }
+    }
+
+    [Authorize]
+    [HttpGet("/users")]
+    public async Task<IActionResult> GetUsers([FromQuery] UsersDTO request)
+    {
+        if (!ModelState.IsValid) return BadRequest();
+        
+        var userPagination = await _userService.Read(request.Page, request.PageSize, HttpContext.RequestAborted);
+
+        return Ok(userPagination);
     }
 }

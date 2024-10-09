@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Practice.Web.Api.DTOs;
+namespace Practice.Web.BlazorApp.Models;
 
-public class RegisterDTO
+public class UserFormModel
 {
-    [Display(Name = "User Name")]
     [Required]
     [StringLength(50, MinimumLength = 5)]
     public string UserName { get; set; }

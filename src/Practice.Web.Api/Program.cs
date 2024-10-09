@@ -72,6 +72,17 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options => {
     options.IdleTimeout = TimeSpan.FromMinutes(5);
     options.Cookie.Name = ".Practice.Web.Session";
+    options.Cookie.HttpOnly = true;
+});
+const string policyName = "CorsPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(policyName, policyBuilder =>
+        policyBuilder
+            .SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials());
 });
 
 var app = builder.Build();
@@ -99,5 +110,7 @@ app.MapSwagger()
 app.MapHealthChecks("/health");
 
 app.MapControllers();
+
+app.UseCors(policyName);
 
 app.Run();

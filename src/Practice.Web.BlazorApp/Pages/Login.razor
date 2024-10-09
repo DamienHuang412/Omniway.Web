@@ -1,0 +1,26 @@
+@page "/login"
+@using Practice.Web.BlazorApp.Models
+@inject IJSRuntime JsRuntime
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+
+@code {
+
+    private async Task UserLogin(UserFormModel model)
+    {
+        var result = await AuthService.Login(model);
+        
+        if(result)
+        {
+            Navigation.NavigateTo("/users");
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Login Failed");
+        }
+    }
+}
+
+<PageTitle>Login</PageTitle>
+
+<UserForm OnUserFormSubmit="UserLogin"/>

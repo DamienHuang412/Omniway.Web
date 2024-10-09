@@ -1,0 +1,35 @@
+@using Practice.Web.BlazorApp.Models
+
+<h3>UserForm</h3>
+
+@code {
+    
+    [Parameter, EditorRequired]
+    public EventCallback<UserFormModel> OnUserFormSubmit { get; set; }
+    
+    private UserFormModel _userFormModel = new();
+
+    private Task HandleSubmit()
+    {
+        return OnUserFormSubmit.InvokeAsync(_userFormModel);
+    }
+}
+
+<h3>Login</h3>
+
+<EditForm Model="@_userFormModel" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="username">User Name</label>
+        <InputText id="username" class="form-control" @bind-Value="_userFormModel.UserName" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <InputText id="password" type="password" class="form-control" @bind-Value="_userFormModel.Password" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
