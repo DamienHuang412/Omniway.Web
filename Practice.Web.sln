@@ -2,9 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice.Web.Core", "src\Practice.Web.Core\Practice.Web.Core.csproj", "{0E7F2F78-F86F-4B0C-8F02-7E414939D06B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice.Web.Entrace", "src\Practice.Web.Entrace\Practice.Web.Entrace.csproj", "{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice.Web.Mvc", "src\Practice.Web.Mvc\Practice.Web.Mvc.csproj", "{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ECC3A705-B042-4428-9766-423AAD752D2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice.Web.Api", "src\Practice.Web.Api\Practice.Web.Api.csproj", "{90D5497B-AC0D-452C-969B-835C45054999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,9 +22,14 @@ Global
 		{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D5497B-AC0D-452C-969B-835C45054999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D5497B-AC0D-452C-969B-835C45054999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D5497B-AC0D-452C-969B-835C45054999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D5497B-AC0D-452C-969B-835C45054999}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0E7F2F78-F86F-4B0C-8F02-7E414939D06B} = {ECC3A705-B042-4428-9766-423AAD752D2A}
 		{A1E2CD2A-0B9B-4DE5-9C67-EB7E3081F45E} = {ECC3A705-B042-4428-9766-423AAD752D2A}
+		{90D5497B-AC0D-452C-969B-835C45054999} = {ECC3A705-B042-4428-9766-423AAD752D2A}
 	EndGlobalSection
 EndGlobal
